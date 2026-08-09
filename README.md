@@ -104,6 +104,39 @@ abre bajo demanda: cuando llaman al timbre, o cuando armas el streaming
 manualmente con el interruptor de la estación o con el servicio
 `abb_welcome.arm_streaming`.
 
+### Abrir la puerta
+
+**El botón de abrir puerta no funciona hasta que suene el timbre por primera
+vez.** Esto es esperado, no es un fallo de configuración.
+
+Los gateways IP normales publican la lista de estaciones exteriores, pero los
+paneles WiFi no exponen las secciones `outdoorstation_*`, así que la
+integración no tiene forma de saber a qué dirección SIP hay que mandar la orden
+de apertura hasta que el propio panel se identifica.
+
+Qué ocurre exactamente:
+
+1. Tras el alta, aparece un botón **Abrir puerta** provisional. Si lo pulsas,
+   no abre nada: lanza un aviso pidiéndote que toques el timbre primero.
+2. En la primera llamada entrante, la integración lee la dirección SIP de la
+   estación de la cabecera `From` del INVITE y la guarda de forma permanente.
+3. Cinco segundos después termina la llamada, la integración se recarga sola y
+   el botón provisional se sustituye por el definitivo, ya con el nombre real
+   de la estación: **Puerta (100000001)**.
+
+La espera de cinco segundos es deliberada, para no cortar el vídeo ni el audio
+en mitad de la llamada que acaba de disparar el descubrimiento.
+
+A partir de ahí el botón queda operativo para siempre, también fuera de
+llamada. El dato sobrevive a reinicios; solo se volvería a perder si eliminas y
+vuelves a añadir la integración.
+
+En el registro lo confirmas con:
+
+```
+WiFi panel: discovered outdoor station from incoming call: uri=... user=100000001 clean_address=sip:100000001@...
+```
+
 ### Hablar por el portero (sin HTTPS)
 
 Esta es la ruta que funciona en cualquier instalación, incluida HTTP. Requiere
@@ -234,6 +267,10 @@ significa que el cliente no pidió el canal: casi siempre porque el navegador no
 tiene micrófono disponible por falta de HTTPS.
 
 ### Problemas frecuentes
+
+**El botón de abrir puerta da error.** Si el mensaje dice que no se ha
+descubierto la estación exterior, toca el timbre una vez y espera unos segundos
+a que la integración se recargue sola. Ver la sección «Abrir la puerta».
 
 **No hay imagen y `decrypt_failed` es alto.** La clave del SDP no coincide.
 Revisa la línea `a=crypto` en el registro.
