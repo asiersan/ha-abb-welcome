@@ -269,5 +269,4 @@ son añadidos de esta versión.
 ## Licencia
 
 MIT, la misma que el proyecto original. El fichero `LICENSE` conserva el aviso
-de copyright de rankjie, como exige la propia licencia, y añade el de asiersan
-por las modificaciones de esta versión.
+de copyright de rankjie, como exige la propia licencia.
