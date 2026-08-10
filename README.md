@@ -57,7 +57,7 @@ portero.
 
 - Home Assistant **2024.11 o superior** (usa la API WebRTC nativa y el go2rtc
   integrado).
-- Un gateway ABB Welcome accesible en la red local.
+- Un gateway ABB Welcome accesible en la red local/ Panel interior wifi.
 - Las dependencias `cryptography` y `requests` las instala Home Assistant
   automáticamente desde el manifiesto.
 
@@ -83,7 +83,7 @@ portero.
 
 ## Configuración
 
-Durante el alta se piden la IP del gateway y las credenciales. Después, en
+Durante el alta se piden la IP del gateway/panel wifi y las credenciales. Después, en
 **Configurar**, están las opciones relevantes para paneles WiFi:
 
 | Opción | Por defecto | Para qué sirve |
