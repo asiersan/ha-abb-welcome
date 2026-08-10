@@ -1,7 +1,7 @@
 # ABB Welcome para Home Assistant — con soporte para paneles WiFi
 
 Integración de Home Assistant para videoporteros **ABB Welcome / Busch-Jaeger**
-que añade compatibilidad con los **paneles exteriores WiFi**: vídeo, audio de
+que añade compatibilidad con los **paneles interiores WiFi**: vídeo, audio de
 bajada y audio de subida (talkback) sobre la conexión SIP/RTP local del
 portero, sin nube.
 
